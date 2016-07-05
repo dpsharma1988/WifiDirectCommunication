@@ -17,7 +17,6 @@ import dxswifi_direct.com.wifidirectcommunication.main.adapter.CustomListAdapter
 import dxswifi_direct.com.wifidirectcommunication.main.interfaces.FirebaseChatCallback;
 import dxswifi_direct.com.wifidirectcommunication.main.model.Message;
 
-
 /**
  * Created by Deepak Sharma on 10/6/16.
  */
