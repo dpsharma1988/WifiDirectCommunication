@@ -9,8 +9,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.util.List;
-import dxswifi_direct.com.wifidirectcommunication.main.model.BaseHTTPRequest;
-import dxswifi_direct.com.wifidirectcommunication.main.model.RequestParameter;
+import dxswifi_direct.com.wifidirectcommunication.main.model.request.BaseHTTPRequest;
+import dxswifi_direct.com.wifidirectcommunication.main.model.request.RequestParameter;
 
 /**
  * Created by Deepak Sharma on 4/7/16.

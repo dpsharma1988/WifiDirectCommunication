@@ -1,4 +1,4 @@
-package dxswifi_direct.com.wifidirectcommunication.main.model;
+package dxswifi_direct.com.wifidirectcommunication.main.model.request;
 
 import java.util.List;
 
