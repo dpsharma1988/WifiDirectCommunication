@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import dxswifi_direct.com.wifidirectcommunication.base.activity.BaseActivity;
-import dxswifi_direct.com.wifidirectcommunication.main.activity.FirebaseChatActivity;
-import dxswifi_direct.com.wifidirectcommunication.main.network.UpdateListener;
+import dxswifi_direct.com.wifidirectcommunication.main.ui.activity.FirebaseChatActivity;
+import dxswifi_direct.com.wifidirectcommunication.main.ui.activity.HitAPIActivity;
 
 /**
  * Created by Deepak Sharma on 10/6/16.
@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
 
             case R.id.btnAPI:
-                startActivity(new Intent(MainActivity.this, dxswifi_direct.com.wifidirectcommunication.main.HitAPIActivity.class));
+                startActivity(new Intent(MainActivity.this, HitAPIActivity.class));
                 break;
 
             default:

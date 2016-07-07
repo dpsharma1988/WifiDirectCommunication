@@ -1,5 +1,7 @@
 package dxswifi_direct.com.wifidirectcommunication.main.network;
 
+import android.util.Log;
+
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.OkHttpClient;
@@ -18,21 +20,21 @@ import dxswifi_direct.com.wifidirectcommunication.main.model.RequestParameter;
 
 public class UpdateListener {
 
-    private onUpdateViewListener onUpdateViewListener;
+    private OnUpdateViewListener onUpdateViewListener;
 
     OkHttpClient client = new OkHttpClient();
-    BaseHTTPRequest requestModel;
+    BaseHTTPRequest mRequestModel;
+    private String mURL;
 
-    public interface onUpdateViewListener {
-        public void updateView(String responseString, boolean isSuccess,
-                               int reqType);
+    public interface OnUpdateViewListener {
+        void updateView(String responseString, boolean isSuccess,int reqType);
     }
 
-    public UpdateListener(onUpdateViewListener onUpdateView, final BaseHTTPRequest requestModel) {
-        this.requestModel = requestModel;
+    public UpdateListener(OnUpdateViewListener onUpdateView, final BaseHTTPRequest requestModel) {
+        this.mRequestModel = requestModel;
         this.onUpdateViewListener = onUpdateView;
 
-        String url = null;
+        mURL = null;
         if (requestModel.getListParameters()!=null && requestModel.getListParameters().size()>0)
         {
             HttpUrl.Builder urlBuilder = HttpUrl.parse(requestModel.getURL()).newBuilder();
@@ -43,22 +45,25 @@ public class UpdateListener {
             {
                 urlBuilder.addQueryParameter(requestParameters.get(i).getKey(),requestParameters.get(i).getValue());
             }
-            url = urlBuilder.build().toString();
+            mURL = urlBuilder.build().toString();
         }
         else
         {
-            url = requestModel.getURL();
+            mURL = requestModel.getURL();
         }
+    }
 
+    public void getJsonData()
+    {
         Request request = new Request.Builder()
-                .url(url)
+                .url(mURL)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
                 e.printStackTrace();
-                onUpdateViewListener.updateView(NetworkException.getErrorMessage(e), false, requestModel.getRequestCode());
+                onUpdateViewListener.updateView(NetworkException.getErrorMessage(e), false, mRequestModel.getRequestCode());
             }
 
             @Override
@@ -67,9 +72,12 @@ public class UpdateListener {
                     // You can also throw your own custom exception
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    onUpdateViewListener.updateView(response.toString(),true,requestModel.getRequestCode());
+                    Log.i("Response:",response.toString());
+                    Log.i("Response body:",response.body().toString());
+                    Log.i("Response message:",response.message());
+                    onUpdateViewListener.updateView(response.body().string(),true, mRequestModel.getRequestCode());
                 }
-                    // do something wih the result
+                // do something wih the result
             }
         });
     }

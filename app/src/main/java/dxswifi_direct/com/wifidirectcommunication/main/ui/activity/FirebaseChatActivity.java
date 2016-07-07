@@ -1,4 +1,4 @@
-package dxswifi_direct.com.wifidirectcommunication.main.activity;
+package dxswifi_direct.com.wifidirectcommunication.main.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;

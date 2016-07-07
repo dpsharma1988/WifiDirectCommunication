@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.activity.FirebaseChatActivity"
+            android:name=".main.ui.activity.FirebaseChatActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".main.activity.WiFiDirectActivity"
+            android:name=".main.ui.activity.WiFiDirectActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -34,7 +34,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".main.HitAPIActivity"
+            android:name=".main.ui.activity.HitAPIActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

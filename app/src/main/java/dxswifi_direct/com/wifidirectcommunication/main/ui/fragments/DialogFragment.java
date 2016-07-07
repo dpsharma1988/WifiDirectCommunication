@@ -93,7 +93,7 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
         super.onActivityCreated(arg0);
 
         // Set Animation for the Dialog Box.
-        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.AppTheme;
     }
 
 }

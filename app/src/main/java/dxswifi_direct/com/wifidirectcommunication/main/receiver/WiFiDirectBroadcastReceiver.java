@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager;
 
-import java.lang.reflect.Method;
-
-import dxswifi_direct.com.wifidirectcommunication.main.activity.WiFiDirectActivity;
+import dxswifi_direct.com.wifidirectcommunication.main.ui.activity.WiFiDirectActivity;
 import dxswifi_direct.com.wifidirectcommunication.main.interfaces.WiFiDirectCallback;
 
 /**
