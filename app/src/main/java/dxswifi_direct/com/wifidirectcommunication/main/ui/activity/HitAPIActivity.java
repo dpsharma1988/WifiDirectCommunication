@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 import dxswifi_direct.com.wifidirectcommunication.R;
 import dxswifi_direct.com.wifidirectcommunication.base.activity.BaseActivity;
 import dxswifi_direct.com.wifidirectcommunication.main.model.request.BaseHTTPRequest;
-import dxswifi_direct.com.wifidirectcommunication.main.model.response.OKHttpModel;
+import dxswifi_direct.com.wifidirectcommunication.main.model.response.okhttp.OKHttpModel;
 import dxswifi_direct.com.wifidirectcommunication.main.network.UpdateListener;
 import dxswifi_direct.com.wifidirectcommunication.main.preferences.MyPreferences;
 import dxswifi_direct.com.wifidirectcommunication.main.ui.fragments.DialogFragment;

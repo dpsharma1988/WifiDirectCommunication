@@ -4,26 +4,27 @@
     android:layout_height="match_parent">
 
     <Button
-        android:text="Social Media"
+        android:text="Facebook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSocialMedia" />
+        android:id="@+id/btnFacepook" />
 
     <Button
-        android:text="Firebase Chat"
+        android:text="G+"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnFirebase" />
+        android:id="@+id/btnGmail" />
 
     <Button
-        android:text="Wifi"
+        android:text="Twitter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnWifi" />
+        android:id="@+id/btnTwitter" />
+
     <Button
-        android:text="API"
+        android:text="Instagram"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnAPI" />
+        android:id="@+id/btnInstagram" />
 
 </LinearLayout>

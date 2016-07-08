@@ -6,6 +6,7 @@ import android.view.View;
 import dxswifi_direct.com.wifidirectcommunication.base.activity.BaseActivity;
 import dxswifi_direct.com.wifidirectcommunication.main.ui.activity.FirebaseChatActivity;
 import dxswifi_direct.com.wifidirectcommunication.main.ui.activity.HitAPIActivity;
+import dxswifi_direct.com.wifidirectcommunication.main.ui.activity.social.SocialAppsActivity;
 
 /**
  * Created by Deepak Sharma on 10/6/16.
@@ -18,6 +19,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        findViewById(R.id.btnSocialMedia).setOnClickListener(this);
         findViewById(R.id.btnFirebase).setOnClickListener(this);
         findViewById(R.id.btnWifi).setOnClickListener(this);
         findViewById(R.id.btnAPI).setOnClickListener(this);
@@ -28,6 +30,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId())
         {
+
+            case R.id.btnSocialMedia:
+                startActivity(new Intent(MainActivity.this, SocialAppsActivity.class));
+                break;
+
             case R.id.btnFirebase:
                 startActivity(new Intent(MainActivity.this, FirebaseChatActivity.class));
                 break;

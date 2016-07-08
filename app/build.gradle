@@ -24,6 +24,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        flavor1 {
+        }
+        flavor2 {
+            proguardFile 'some-other-rules.txt'
+        }
+    }
+
 }
 
 dependencies {
@@ -41,4 +50,7 @@ dependencies {
 
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.google.code.gson:gson:2.2.+'
+
+
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
 }

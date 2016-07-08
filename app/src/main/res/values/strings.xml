@@ -29,4 +29,14 @@
     <string name="discover_peers">Discover Peers</string>
     <string name="enable_wifi">Enable WiFi</string>
     <string name="network_disable_msg">Please check your internet connection!</string>
+
+
+
+    <!--// Facebook string values-->
+    <string name="facebook_app_id">1610139385944971</string>
+    <string name="facebook_app_keyhash">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
+    <string name="update_status">Update Status</string>
+    <string name="post_image">Post Image</string>
+    // if your App ID is 1234567, you should use fb1234567
+    <string name="fb_login_protocol_scheme">fb1610139385944971</string>
 </resources>
