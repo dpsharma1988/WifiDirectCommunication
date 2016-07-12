@@ -15,10 +15,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
 
         <activity android:name=".MainActivity" >
             <intent-filter>
@@ -27,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".main.ui.activity.social.SocialAppsActivity"
             android:label="@string/app_name" >
@@ -36,8 +34,10 @@
             android:name=".main.ui.activity.social.FBLoginActivity"
             android:label="@string/app_name" >
         </activity>
-
-
+        <activity
+            android:name=".main.ui.activity.social.GPlusLoginActivity"
+            android:label="@string/app_name" >
+        </activity>
         <activity
             android:name=".main.ui.activity.FirebaseChatActivity"
             android:label="@string/app_name" >
@@ -54,28 +54,32 @@
             android:name=".main.ui.activity.HitAPIActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1234"
+        <provider
             android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1610139385944971"
             android:exported="true" />
 
-        <!--Enable Chrome Custom Tabs by adding an intent filter to your manifest and a fb_login_protocol_scheme to your strings.xml file.
+        <!--
+        Enable Chrome Custom Tabs by adding an intent filter to your manifest and a fb_login_protocol_scheme to your strings.xml file.
         When you enable Chrome Custom Tabs, the SDK presents the login dialog in a Chrome Custom Tab instead of a WebView when the Facebook
         app is not installed. As a result, people do not have to enter their credentials again if they are already logged into Facebook in their
-        Chrome browser.-->
+        Chrome browser.
+        -->
         <activity
             android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>

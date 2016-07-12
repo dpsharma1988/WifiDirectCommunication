@@ -32,6 +32,17 @@
 
 
 
+    <!--Certificate fingerprints:-->
+    <!--MD5:  08:32:93:9B:64:EF:96:6D:13:04:73:E0:45:CA:E4:AB
+    SHA1: 7C:F3:F5:CA:45:90:71:3C:57:18:CF:21:DC:36:C1:23:ED:6A:8E:7F
+    SHA256: 7D:90:F3:69:C8:42:06:EF:B5:57:D6:3B:19:E3:81:76:5F:D4:99:DD:4D:6A:96:CA:16:AD:33:5B:04:E5:37:42-->
+    <string name="md5">08:32:93:9B:64:EF:96:6D:13:04:73:E0:45:CA:E4:AB</string>
+    <string name="sha1">7C:F3:F5:CA:45:90:71:3C:57:18:CF:21:DC:36:C1:23:ED:6A:8E:7F</string>
+    <string name="sha256">7D:90:F3:69:C8:42:06:EF:B5:57:D6:3B:19:E3:81:76:5F:D4:99:DD:4D:6A:96:CA:16:AD:33:5B:04:E5:37:42</string>
+
+
+
+
     <!--// Facebook string values-->
     <string name="facebook_app_id">1610139385944971</string>
     <string name="facebook_app_keyhash">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
@@ -39,4 +50,8 @@
     <string name="post_image">Post Image</string>
     // if your App ID is 1234567, you should use fb1234567
     <string name="fb_login_protocol_scheme">fb1610139385944971</string>
+    <string name="share_multimedia">Share Multimedia</string>
+    <string name="share_link">Share Link</string>
+    <string name="share_photo">Share Photo</string>
+    <string name="share_video">Share Video</string>
 </resources>

@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -27,14 +28,18 @@ import com.facebook.internal.ImageResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.ShareMediaContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.model.ShareVideo;
+import com.facebook.share.model.ShareVideoContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.gson.Gson;
-
 import org.json.JSONObject;
-
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import dxswifi_direct.com.wifidirectcommunication.R;
@@ -44,7 +49,7 @@ import dxswifi_direct.com.wifidirectcommunication.main.model.response.facebook.U
 /**
  * Created by Deepak Sharma on 8/7/16.
  */
-public class FBLoginActivity extends BaseActivity{
+public class FBLoginActivity extends BaseActivity implements View.OnClickListener{
 
     public String TAG = this.getClass().getSimpleName();
     // Creating Facebook CallbackManager Value
@@ -55,6 +60,8 @@ public class FBLoginActivity extends BaseActivity{
     private TextView userName;
     private Button btnPostImage;
     private Button btnUpdateStatus;
+
+    private ShareDialog shareDialog;
 
  //   private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
     private static List<String> PERMISSIONS = Arrays.asList("public_profile","user_photos", "email","user_likes","user_posts",
@@ -75,6 +82,11 @@ public class FBLoginActivity extends BaseActivity{
     public JSONObject user;
     private Drawable userProfilePic;
     private String userProfilePicID;
+    private Button btnShare;
+    private Button btnShareMultimedia;
+    private Button btnShareLink;
+    private Button btnSharePhoto;
+    private Button btnShareVideo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,8 +100,20 @@ public class FBLoginActivity extends BaseActivity{
 
         userName = (TextView) findViewById(R.id.user_name);
         mImgProfilePic= (ImageView) findViewById(R.id.imgProfile);
-        btnUpdateStatus = (Button)findViewById(R.id.update_status);
-        btnPostImage = (Button)findViewById(R.id.post_image);
+        btnShare = (Button)findViewById(R.id.btnShare);
+        btnShare.setOnClickListener(this);
+        btnShareLink = (Button)findViewById(R.id.btnShareLink);
+        btnShareLink.setOnClickListener(this);
+        btnSharePhoto = (Button)findViewById(R.id.btnSharePhoto);
+        btnSharePhoto.setOnClickListener(this);
+        btnShareVideo = (Button)findViewById(R.id.btnShareVideo);
+        btnShareVideo.setOnClickListener(this);
+        btnShareMultimedia = (Button)findViewById(R.id.btnShareMultimedia);
+        btnShareMultimedia.setOnClickListener(this);
+        btnUpdateStatus = (Button)findViewById(R.id.btnUpdateStatus);
+        btnUpdateStatus.setOnClickListener(this);
+        btnPostImage = (Button)findViewById(R.id.btnPostImage);
+        btnPostImage.setOnClickListener(this);
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken != null) {
@@ -153,7 +177,6 @@ public class FBLoginActivity extends BaseActivity{
                         callbackManager.onActivityResult(requestCode, resultCode, data);
                         /*Log.i(TAG,"onActivityResult : "+ AccessToken.getCurrentAccessToken() );
                         Log.i(TAG,"onActivityResult : "+ Profile.getCurrentProfile());*/
-                        fetchUserInfo();
 
     }
 
@@ -174,7 +197,6 @@ public class FBLoginActivity extends BaseActivity{
         mCurrentAccessToken = AccessToken.getCurrentAccessToken();
     }
 
-
     // If you want your app to keep up with the current profile, you need to implement onCurrentProfileChanged() abstract method of ProfileTracker classe.
     public void profileTracker()
     {
@@ -186,7 +208,6 @@ public class FBLoginActivity extends BaseActivity{
             }
         };
     }
-
 
     @Override
     protected void onDestroy() {
@@ -233,7 +254,6 @@ public class FBLoginActivity extends BaseActivity{
         }
     }
 
-
     private ImageRequest getImageRequest() {
         ImageRequest request = null;
         ImageRequest.Builder requestBuilder = new ImageRequest.Builder(this, ImageRequest.getProfilePictureUri(
@@ -271,6 +291,164 @@ public class FBLoginActivity extends BaseActivity{
         }
     }
 
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btnShare:
+                sharePost();
+                break;
+
+            case R.id.btnShareMultimedia:
+
+                try {
+                    /*Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setComponent(new ComponentName("com.facebook.katana",
+                            "com.facebook.katana.activity.composer.ImplicitShareIntentHandler"));
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "http://i.huffpost.com/gen/3046086/images/o-TESS-HOLLIDAY-facebook.jpg");
+                    startActivity(shareIntent);*/
+
+
+                }
+                catch(Exception exception)
+                {
+
+                }
+                break;
+
+            case R.id.btnShareLink:
+                shareLink();
+                break;
+
+            case R.id.btnUpdateStatus:
+                sharePost();
+                break;
+
+            case R.id.btnSharePhoto:
+                sharePhoto();
+                break;
+
+            case R.id.btnShareVideo:
+                shareVideo();
+                break;
+
+            case R.id.btnPostImage:
+                sharePost();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+
+
+    private void sharePost() {
+        shareDialog = new ShareDialog(this);
+
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentTitle("Hello Facebook")
+                    .setContentDescription(
+                            "'Hello Facebook' Its a simple Facebook share integration")
+                    .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
+                    .setShareHashtag(new ShareHashtag.Builder()// Optional if you wants to add hashtag
+                            .setHashtag("#Professional share")
+                            .build())
+                    .build();
+
+            shareDialog.show(linkContent);
+        }
+
+        // this part is optional
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onSuccess(Sharer.Result result) {
+                Log.i(TAG, "shareDialog onSuccess()");
+
+            }
+
+            @Override
+            public void onCancel() {
+                Log.i(TAG, "shareDialog onCancel()");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.i(TAG, "shareDialog onError()");
+            }
+        });
+    }
+    private void shareLink() {
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                .build();
+        ShareDialog shareDialog = new ShareDialog(this);
+        shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
+    }
+
+    private void sharePhoto()
+    {
+        Bitmap image = BitmapFactory.decodeResource(getResources(),R.drawable.gift_icon);
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(image)
+                .build();
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();
+        ShareDialog shareDialog = new ShareDialog(this);
+        //    shareDialog.show(shareContent, ShareDialog.Mode.AUTOMATIC);
+        shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
+    }
+
+    private void shareVideo() {
+        Uri videoFileUri = null;
+        ShareVideo shareVideo = new ShareVideo.Builder()
+                .setLocalUrl(videoFileUri)
+                .build();
+        ShareVideoContent content = new ShareVideoContent.Builder()
+                .setVideo(shareVideo)
+                .build();
+    }
+
+    private void shareMumtimedia() {
+        Bitmap icon1 = BitmapFactory.decodeResource(getResources(),R.drawable.gift_icon);
+        Bitmap icon2 = BitmapFactory.decodeResource(getResources(),R.drawable.common_google_signin_btn_icon_dark_focused);
+        SharePhoto sharePhoto1 = new SharePhoto.Builder()
+                .setBitmap(icon1)
+                .build();
+        SharePhoto sharePhoto2 = new SharePhoto.Builder()
+                .setBitmap(icon2)
+                .build();
+        /*ShareVideco shareVideo1 = new ShareVideo.Builder()
+                .setLocalUrl(...)
+        .build();
+        ShareVideo shareVideo2 = new ShareVideo.Builder()
+                .setLocalUrl(...)
+        .build();*/
+
+        ShareMediaContent shareMediaContent = new ShareMediaContent.Builder()
+                .addMedium(sharePhoto1)
+                .addMedium(sharePhoto2)
+                                                /*.addMedium(shareVideo1)
+                                                .addMedium(shareVideo2)*/
+                .build();
+
+        /*ShareContent shareContent = new ShareMediaContent.Builder()
+                .addMedium(sharePhoto1)
+                .addMedium(sharePhoto2)
+                .addMedium(shareVideo1)
+                .addMedium(shareVideo2)
+                .build();*/
+
+        ShareDialog shareDialog = new ShareDialog(this);
+        //    shareDialog.show(shareContent, ShareDialog.Mode.AUTOMATIC);
+        shareDialog.show(shareMediaContent, ShareDialog.Mode.AUTOMATIC);
+
+    }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnFBLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
+
+    <ImageView
+        android:layout_width="@dimen/fb_profile_pic_width"
+        android:layout_height="@dimen/fb_profile_pic_height"
+        android:id="@+id/imgProfile"
+        android:layout_margin="10dp"
+        android:src="@drawable/gift_icon"
+        android:layout_gravity="center_horizontal" />
+
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/com_facebook_share_button_text" />
+
+    <Button
+        android:id="@+id/btnShareLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/share_link" />
+
+    <Button
+        android:id="@+id/btnSharePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/share_photo" />
+
+    <Button
+        android:id="@+id/btnShareVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    android:text="@string/share_video" />
+
+    <Button
+        android:id="@+id/btnShareMultimedia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/share_multimedia" />
+
+    <Button
+        android:id="@+id/btnUpdateStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_status" />
+
+    <Button
+        android:id="@+id/btnPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/post_image" />
+
+</LinearLayout>
