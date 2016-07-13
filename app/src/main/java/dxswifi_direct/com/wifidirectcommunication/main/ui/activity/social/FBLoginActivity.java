@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -28,6 +31,7 @@ import com.facebook.internal.ImageResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.ShareApi;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
@@ -39,7 +43,11 @@ import com.facebook.share.model.ShareVideoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.gson.Gson;
 import org.json.JSONObject;
+
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import dxswifi_direct.com.wifidirectcommunication.R;
@@ -64,7 +72,7 @@ public class FBLoginActivity extends BaseActivity implements View.OnClickListene
     private ShareDialog shareDialog;
 
  //   private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
-    private static List<String> PERMISSIONS = Arrays.asList("public_profile","user_photos", "email","user_likes","user_posts",
+    private static List<String> PERMISSIONS = Arrays.asList("public_profile","user_photos","user_videos", "email","user_likes","user_posts",
                                                 "user_hometown", "user_location","user_about_me","user_birthday",
                                                 "user_friends","user_relationship_details");
 
@@ -92,6 +100,12 @@ public class FBLoginActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fb_login);
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy =
+                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         callbackManager = CallbackManager.Factory.create();
         btnFBLogin = (LoginButton)findViewById(R.id.btnFBLogin);
@@ -144,6 +158,7 @@ public class FBLoginActivity extends BaseActivity implements View.OnClickListene
             }
         });*/
 
+        LoginManager.getInstance().logInWithPublishPermissions(this,Arrays.asList("publish_actions"));
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
@@ -310,12 +325,10 @@ public class FBLoginActivity extends BaseActivity implements View.OnClickListene
                     shareIntent.setType("text/plain");
                     shareIntent.putExtra(Intent.EXTRA_TEXT, "http://i.huffpost.com/gen/3046086/images/o-TESS-HOLLIDAY-facebook.jpg");
                     startActivity(shareIntent);*/
-
-
                 }
                 catch(Exception exception)
                 {
-
+                    exception.printStackTrace();
                 }
                 break;
 
@@ -328,7 +341,11 @@ public class FBLoginActivity extends BaseActivity implements View.OnClickListene
                 break;
 
             case R.id.btnSharePhoto:
-                sharePhoto();
+                try {
+                    sharePhoto();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
 
             case R.id.btnShareVideo:
@@ -390,9 +407,54 @@ public class FBLoginActivity extends BaseActivity implements View.OnClickListene
         shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
     }
 
-    private void sharePhoto()
-    {
-        Bitmap image = BitmapFactory.decodeResource(getResources(),R.drawable.gift_icon);
+
+    /**
+     * This is a method which can post an image to the facebook wall.
+     * @throws IOException
+     */
+    private void sharePhoto() throws IOException {
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+        String imageUri = "drawable://" + R.drawable.gift_icon;
+                                /*OR*/
+        Uri path = Uri.parse("android.resource://dxswifi_direct.com.wifidirectcommunication/" + R.drawable.gift_icon);
+        Uri otherPath = Uri.parse("android.resource://dxswifi_direct.com.wifidirectcommunication/drawable/gift_icon");
+        String path1 = path.toString();
+        String path2 = otherPath.toString();
+
+
+        imageUri = "http://i.dailymail.co.uk/i/pix/2015/04/22/21/27DEB82000000578-3051045-image-a-25_1429735533586.jpg";
+        URL url = new URL(imageUri);
+        Bitmap image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        /*SharePhoto photo = new SharePhoto.Builder().setBitmap(image).build();
+        Bitmap image = BitmapFactory.decodeFile(imageUri, bmOptions);*/
+        SharePhoto photo = new SharePhoto.Builder().setBitmap(image).build();
+        SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
+        Toast.makeText(getApplicationContext(), getString(R.string.facebook_uploading), Toast.LENGTH_SHORT).show();
+
+        ShareApi.share(content, new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onSuccess(Sharer.Result result)
+            {
+                Toast.makeText(getApplicationContext(), getString(R.string.facebook_successful), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel()
+            {
+                Log.v("FACEBOOK_TEST", "share api cancel");
+            }
+
+            @Override
+            public void onError(FacebookException e)
+            {
+                Log.v("FACEBOOK_TEST", "share api error " + e);
+            }
+        });
+
+        //******************************************
+        /*Bitmap image = BitmapFactory.decodeResource(getResources(),R.drawable.gift_icon);
         SharePhoto photo = new SharePhoto.Builder()
                 .setBitmap(image)
                 .build();
@@ -401,17 +463,23 @@ public class FBLoginActivity extends BaseActivity implements View.OnClickListene
                 .build();
         ShareDialog shareDialog = new ShareDialog(this);
         //    shareDialog.show(shareContent, ShareDialog.Mode.AUTOMATIC);
-        shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
+        shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);*/
     }
 
+    /**
+     * This is a method which can post an image to the facebook wall.
+     * @throws IOException
+     */
     private void shareVideo() {
-        Uri videoFileUri = null;
+        Uri videoFileUri =  Uri.parse("https://www.youtube.com/watch?v=gsMHXeHroVU");
         ShareVideo shareVideo = new ShareVideo.Builder()
                 .setLocalUrl(videoFileUri)
                 .build();
         ShareVideoContent content = new ShareVideoContent.Builder()
                 .setVideo(shareVideo)
                 .build();
+        ShareDialog shareDialog = new ShareDialog(this);
+        shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
     }
 
     private void shareMumtimedia() {
