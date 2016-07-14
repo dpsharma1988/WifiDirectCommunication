@@ -37,7 +37,6 @@ android {
             proguardFile 'some-other-rules.txt'
         }
     }
-
 }
 
 dependencies {
@@ -58,4 +57,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
     compile 'com.google.android.gms:play-services:9.2.0'
+    compile 'com.google.firebase:firebase-messaging:9.0.0'
+    compile "com.google.android.gms:play-services-gcm:9.2.0"
+    compile 'com.google.android.gms:play-services-auth:9.2.0'
 }
+apply plugin: 'com.google.gms.google-services'

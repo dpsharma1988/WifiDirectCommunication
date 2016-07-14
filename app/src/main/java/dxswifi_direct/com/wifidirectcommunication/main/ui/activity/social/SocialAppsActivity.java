@@ -33,7 +33,7 @@ public class SocialAppsActivity  extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.btnGmail:
-            //    startActivity(new Intent(SocialAppsActivity.this, .class));
+                startActivity(new Intent(SocialAppsActivity.this, GPlusLoginActivity.class));
                 break;
 
             case R.id.btnInstagram:

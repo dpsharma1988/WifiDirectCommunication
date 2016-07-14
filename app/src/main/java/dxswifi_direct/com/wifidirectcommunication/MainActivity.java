@@ -23,14 +23,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         findViewById(R.id.btnFirebase).setOnClickListener(this);
         findViewById(R.id.btnWifi).setOnClickListener(this);
         findViewById(R.id.btnAPI).setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
-
             case R.id.btnSocialMedia:
                 startActivity(new Intent(MainActivity.this, SocialAppsActivity.class));
                 break;
@@ -38,6 +36,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.btnFirebase:
                 startActivity(new Intent(MainActivity.this, FirebaseChatActivity.class));
                 break;
+
             case R.id.btnWifi:
             //    startActivity(new Intent(MainActivity.this, WiFiDirectActivity.class));
                 startActivity(new Intent(MainActivity.this, dxswifi_direct.com.wifidirectcommunication.main.WiFiDirectActivity.class));
@@ -51,5 +50,4 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
         }
     }
-
 }

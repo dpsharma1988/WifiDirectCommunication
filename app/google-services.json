@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "543172537645",
+    "firebase_url": "https://wifidirectcommunication.firebaseio.com",
+    "project_id": "wifidirectcommunication",
+    "storage_bucket": "wifidirectcommunication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543172537645:android:bfca78d95ce36d93",
+        "android_client_info": {
+          "package_name": "dxswifi_direct.com.wifidirectcommunication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543172537645-odj4e95ks9iu9is2f6ffbr1l60si2oso.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dxswifi_direct.com.wifidirectcommunication",
+            "certificate_hash": "7CF3F5CA4590713C5718CF21DC36C123ED6A8E7F"
+          }
+        },
+        {
+          "client_id": "543172537645-gtgg61d87iusc3s39bnumfl1jrl5b3j0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3rhmmlMu76IMZZQqBgdH27K1HkA14oo0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543172537645-gtgg61d87iusc3s39bnumfl1jrl5b3j0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

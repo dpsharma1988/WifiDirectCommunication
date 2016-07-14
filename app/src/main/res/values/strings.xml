@@ -56,4 +56,11 @@
     <string name="share_video">Share Video</string>
     <string name="facebook_uploading">Facebook Uploading</string>
     <string name="facebook_successful">Facebook Successful</string>
+
+
+
+
+    <string name="gmail_o_auth">543172537645-odj4e95ks9iu9is2f6ffbr1l60si2oso.apps.googleusercontent.com</string>
+    <string name="signed_in_fmt">Signed in</string>
+    <string name="signed_out">Signed Out</string>
 </resources>
