@@ -16,7 +16,6 @@
     <string name="returns">Returns Policy</string>
     <string name="privacy">Privacy Policy</string>
 
-
     <string name="mobile">Mobiles</string>
     <string name="tv">Televisions</string>
     <string name="televisions">Televisions</string>
@@ -30,20 +29,12 @@
     <string name="enable_wifi">Enable WiFi</string>
     <string name="network_disable_msg">Please check your internet connection!</string>
 
-
-
     <!--Certificate fingerprints:-->
-    <!--MD5:  08:32:93:9B:64:EF:96:6D:13:04:73:E0:45:CA:E4:AB
-    SHA1: 7C:F3:F5:CA:45:90:71:3C:57:18:CF:21:DC:36:C1:23:ED:6A:8E:7F
-    SHA256: 7D:90:F3:69:C8:42:06:EF:B5:57:D6:3B:19:E3:81:76:5F:D4:99:DD:4D:6A:96:CA:16:AD:33:5B:04:E5:37:42-->
     <string name="md5">08:32:93:9B:64:EF:96:6D:13:04:73:E0:45:CA:E4:AB</string>
     <string name="sha1">7C:F3:F5:CA:45:90:71:3C:57:18:CF:21:DC:36:C1:23:ED:6A:8E:7F</string>
     <string name="sha256">7D:90:F3:69:C8:42:06:EF:B5:57:D6:3B:19:E3:81:76:5F:D4:99:DD:4D:6A:96:CA:16:AD:33:5B:04:E5:37:42</string>
 
-
-
-
-    <!--// Facebook string values-->
+    <!-- Facebook credentials and string values-->
     <string name="facebook_app_id">1610139385944971</string>
     <string name="facebook_app_keyhash">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
     <string name="update_status">Update Status</string>
@@ -57,10 +48,14 @@
     <string name="facebook_uploading">Facebook Uploading</string>
     <string name="facebook_successful">Facebook Successful</string>
 
-
-
-
+    <!-- Gmail credentials and string values-->
     <string name="gmail_o_auth">543172537645-odj4e95ks9iu9is2f6ffbr1l60si2oso.apps.googleusercontent.com</string>
     <string name="signed_in_fmt">Signed in</string>
     <string name="signed_out">Signed Out</string>
+
+    <!-- Insta credentials and string values-->
+    <string name="insta_client_id">d7006f12eb434054be395939cdd2bfde</string>
+    <string name="insta_client_secret">6af14bdbe25442829c683207cfaf3027</string>
+
+    <!-- Twitter credentials and string values-->
 </resources>

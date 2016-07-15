@@ -3,6 +3,8 @@ package dxswifi_direct.com.wifidirectcommunication.main.ui.activity.social;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
 import dxswifi_direct.com.wifidirectcommunication.R;
 import dxswifi_direct.com.wifidirectcommunication.base.activity.BaseActivity;
 
@@ -37,10 +39,12 @@ public class SocialAppsActivity  extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.btnInstagram:
+                Toast.makeText(SocialAppsActivity.this,"In process...", Toast.LENGTH_SHORT).show();
             //    startActivity(new Intent(SocialAppsActivity.this, .class));
                 break;
 
             case R.id.btnTwitter:
+                Toast.makeText(SocialAppsActivity.this,"In process...", Toast.LENGTH_SHORT).show();
                 //    startActivity(new Intent(SocialAppsActivity.this, .class));
                 break;
 
